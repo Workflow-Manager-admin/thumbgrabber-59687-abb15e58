@@ -17,6 +17,7 @@ function App() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Provided API key from prompt
   const YT_API_KEY = "AIzaSyDeUqxgpzrSQHBPh1JhxaQhFpE7UQYAZq0";
 
   // Extract YouTube video ID from a valid URL
@@ -27,10 +28,11 @@ function App() {
      * Returns '' if invalid/unmatched.
      */
     if (!youtubeUrl) return '';
+    // Covers youtu.be/VIDEOID, youtube.com/watch?v=VIDEOID, embed, shorts, etc.
     const exp =
       /(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:\S*&)?v=|embed\/|v\/|shorts\/|user\/\S+|c\/\S+|.+#v=))([a-zA-Z0-9_-]{11})/;
     const match = youtubeUrl.match(exp);
-    // Directly check for v= in query string (for full URLs too)
+    // Direct check for v= in query string (for full URLs too)
     let id = '';
     if (match && match[1]) {
       id = match[1];
